@@ -50,7 +50,6 @@ Services: imperative approach, create service as a command
 * programmatically expose  hello-pod (from pod.yml)
 ```shell
 kubectl apply -f ./Pods/pod.yml
-cd Services
 kubectl expose pod hello-pod \
 --name=hello-svc \
 --target-port=8080 \
@@ -79,3 +78,33 @@ kubectl delete service --all
 kubectl delete --all pods
 ```
 
+Services: with service manifest (nodeport)
+=============================
+```shell
+kubectl apply -f ./Pods/pod.yml
+kubectl apply -f ./Services/svc-nodeport.yml
+```
+
+```shell
+kubectl describe service ps-nodeport
+```
+
+```shell
+minikube service ps-nodeport --url
+```
+
+Services: with service manifest (cloud loadbalancer!!!)
+=============================
+```shell
+kubectl apply -f ./Pods/pod.yml
+kubectl apply -f ./Services/svc-lb.yml
+```
+```shell
+kubectl describe service ps-lb
+```
+
+```shell
+minikube service ps-lb --url
+```
+* or with tunnel
+* https://minikube.sigs.k8s.io/docs/handbook/accessing/#:~:text=own%20IP%20address.-,Using%20minikube%20tunnel,routes%20will%20be%20cleaned%20up.
