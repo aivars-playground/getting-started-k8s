@@ -57,12 +57,21 @@ kubectl expose pod hello-pod \
 --type=NodePort
 ```
 ```shell
+#does not work in docker
 minikube ip
 #192.168.49.2
 kubectl get service
 #hello-svc  8080:31515/TCP
 curl http://127.0.0.1:31515
 curl 192.168.49.2:31515
+#hello-svc  8080:31515/TCP
+
+```
+
+```shell
+#Services of type NodePort can be exposed via the minikube service <service-name> --url command. It must be run in a separate terminal window to keep the tunnel open. Ctrl-C in the terminal can be used to terminate the process at which time the network routes will be cleaned up.
+minikube service hello-svc --url
+# http://127.0.0.1:33053 Because you are using a Docker driver on linux, the terminal needs to be open to run it.
 ```
 
 ```shell
