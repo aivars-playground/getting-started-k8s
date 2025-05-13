@@ -21,7 +21,7 @@ kubectl get pods --watch
 ```
 
 
-PODS - multi-cpntainer
+PODS - multi-container
 =============
 ```shell
 kubectl apply -f ./Pods/multi-pod.yml
@@ -108,3 +108,62 @@ minikube service ps-lb --url
 ```
 * or with tunnel
 * https://minikube.sigs.k8s.io/docs/handbook/accessing/#:~:text=own%20IP%20address.-,Using%20minikube%20tunnel,routes%20will%20be%20cleaned%20up.
+
+Deployments:
+=============
+```shell
+kubectl apply -f ./Services/svc-lb.yml
+kubectl apply -f ./Services/svc-nodeport.yml
+```
+```shell
+kubectl apply -f Deployments/deploy.yml
+```
+```shell
+kubectl delete service --all
+kubectl delete pods    --all
+kubectl delete deployment --all
+```
+```shell
+kubectl get svc
+kubectl get deployment
+kubectl get pod
+kubectl get rs
+```
+```shell
+kubectl describe service ps-lb 
+```
+```shell
+kubectl describe ep ps-lb 
+```
+```shell
+kubectl get pods --show-labels
+```
+```shell
+minikube service ps-lb --url
+```
+
+*starts browser automatically
+```shell
+minikube service ps-lb
+```
+
+```shell
+minikube dashboard
+```
+* tunnel to loadbalancer - 80
+```shell
+minikube tunnel
+```
+```shell
+curl http://127.0.0.1/
+```
+
+* scaling... change replicas, apply deploy
+
+* versioning
+```shell
+kubectl apply -f Deployments/deploy-complete.yml
+```
+```shell
+kubectl rollout status deploy web-deploy
+```
